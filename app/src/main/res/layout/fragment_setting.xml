@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/splashbg"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/side_icon"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"/>
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivLocation"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:src="@drawable/location"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/ivLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/set_location"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/grey">
+
+                </View>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/side_icon"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"/>
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivNotification"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:src="@drawable/notification"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/ivNotification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manage_notifiation"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/grey">
+
+                </View>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/side_icon"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"/>
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivResponse"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:src="@drawable/reply"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/ivResponse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_response"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/grey">
+
+                </View>
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/side_icon"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"/>
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivPostQuestion"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:src="@drawable/post_question"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/ivPostQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_posted_question"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/grey">
+
+                </View>
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/side_icon"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"/>
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivManageprofile"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:src="@drawable/profile"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/ivManageprofile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manage_my_profile"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/grey">
+
+                </View>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

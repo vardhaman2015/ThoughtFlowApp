@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/black"
+    android:text="@string/enterquestion"/>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="8dp"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                   >
+
+                  <EditText
+                      android:background="@drawable/etbg"
+                      android:layout_width="match_parent"
+                      android:minHeight="50dp"
+                      android:layout_height="50dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="@string/uploadaudiofile"/>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingLeft="8dp"
+                        android:background="@drawable/etbg">
+                        <ImageView
+                            android:id="@+id/ivUpload"
+                            android:layout_centerVertical="true"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/upload"
+                            android:padding="5dp"
+                            android:layout_alignParentLeft="true"/>
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/audio_file"
+                            android:padding="5dp"
+                            android:layout_alignParentRight="true"/>
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivUpload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/browsefile"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="@string/youtubefile"/>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingLeft="8dp"
+                        android:background="@drawable/etbg">
+                        <ImageView
+                            android:id="@+id/ivglob"
+                            android:layout_centerVertical="true"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/globe"
+                            android:padding="5dp"
+                            android:layout_alignParentLeft="true"/>
+
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivglob"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/browsefile"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/choices"/>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radiobutton"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/checkbox"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Text Boxes"/>
+                </LinearLayout>
+            </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/settimelimit"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</LinearLayout>
+
+</layout>
