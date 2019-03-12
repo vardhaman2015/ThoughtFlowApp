@@ -10,8 +10,21 @@ public class LoginPresenter implements ILoginPresenter {
     @Override
     public void doLogin(String email, String password)
     {
+        if(email.equals(""))
+        {
+            lognView.showMessage("Pleas fill this");
+        }
+        else  if(password.equals(""))
+        {
+            lognView.showMessage("Pleas fill this");
+        }
+        else
+        {
+            lognView.showMessage("Success");
+        }
 
-        lognView.showMessage("");
+
+
 
     }
 }

@@ -5,10 +5,15 @@ package pcube.servey.NavgationDrawerUtils;
  */
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,15 +23,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
 import pcube.servey.R;
+import pcube.servey.SplashActivity;
 import pcube.servey.answerquestion.Fragment_AnswerQuestion;
 import pcube.servey.answerquestion.Fragment_Response;
 import pcube.servey.help.Fragment_Help;
+import pcube.servey.networkUtils.BackGroundTask;
+import pcube.servey.networkUtils.Constant;
+import pcube.servey.networkUtils.OnTaskCompleted;
 import pcube.servey.postquestion.Fragment_PostQuestion;
 import pcube.servey.setting.Fragment_Setting;
+import pcube.servey.utils.StorePrefs;
+import pcube.servey.utils.Utils;
 
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {
@@ -63,7 +78,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         if (position == currentPosition) {
             holder.TopLayout.setBackgroundResource(R.drawable.item_pressed);
 
-        } else {
+        }
+        else {
             holder.TopLayout.setBackgroundResource(R.drawable.item_normal);
         }
 
@@ -107,10 +123,25 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             switch (slug) {
 
                 case "openservy":
-                    fragment = new Fragment_AnswerQuestion();
+                    if (!StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,context).equalsIgnoreCase("3"))
+                    {
+                        fragment = new Fragment_AnswerQuestion();
+                    }
+                    else {
+                        Toast.makeText(context,"Can't view ",Toast.LENGTH_SHORT).show();
+                    }
+
+
                     break;
                 case "postquestion":
-                     fragment = new Fragment_PostQuestion();
+                    if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,context).equalsIgnoreCase("3"))
+                    {
+                        fragment = new Fragment_PostQuestion();
+                    }
+                    else {
+                        Toast.makeText(context,"Can't add ",Toast.LENGTH_SHORT).show();
+                    }
+
                     break;
                 case "setting":
                     fragment = new Fragment_Setting();
@@ -119,7 +150,14 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     fragment = new Fragment_Help();
                     break;
                 case "response":
-                     fragment = new Fragment_Response();
+                    if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,context).equalsIgnoreCase("3"))
+                    {
+                        fragment = new Fragment_Response();
+                    }
+                    else {
+                        Toast.makeText(context,"Can't view ",Toast.LENGTH_SHORT).show();
+                    }
+
                     //fragment = new Fragment_Dealer_retailer_Locater_list();
                     break;
 
@@ -149,6 +187,77 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
 
                 case "logout":
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(context.getResources().getString(R.string.app_name));
+                builder.setMessage("Dou you want to logout?");
+                builder.setPositiveButton(context.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, int which)
+                    {
+                        JSONObject jsonObject = new JSONObject();
+
+                        try {
+
+
+                            jsonObject.put("user_id", StorePrefs.getDefaults(StorePrefs.PREFS_USER_ID, context));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("params", "12333" + jsonObject.toString());
+
+                        new BackGroundTask.BackGroundTaskPOSTWithHeaderWithRawData(context, Constant.logout, "", jsonObject.toString(),
+                                new OnTaskCompleted() {
+                                    @Override
+                                    public void onTaskCompleted(String response)
+                                    {
+                                        Log.e("responsetesttscheck", response);
+
+                                        try {
+                                            JSONObject jsonObject1 = new JSONObject(response);
+                                            if (jsonObject1.getInt("status") == 1)
+                                            {
+                                                Utils.displayToastMessage(context, jsonObject1.getString("message"));
+                                                dialog.dismiss();
+                                                StorePrefs.clearAllDefaults(context);
+                                                Intent intent = new Intent(context, SplashActivity.class);
+                                                context.startActivity(intent);
+                                            }
+                                            else {
+                                                Utils.displayToastMessage(context, "error");
+                                            }
+
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(String error) {
+
+                                    }
+                                }).execute();
+
+
+
+
+
+
+                    }
+
+
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                     //logout();
                     break;
                 default:

@@ -136,7 +136,7 @@ public class FragmentDrawer extends Fragment {
 
        // imageUrl = baseUrlForImage + StorePrefs.getDefaults("IMAGE", getActivity())+"?token="+StorePrefs.getDefaults("token", getActivity());
 
-        Log.e("ImageUrl -- ",""+imageUrl);
+
        //   aniimageView =  layout.findViewById(R.id.aniimageView);
         loadingPanel =  layout.findViewById(R.id.loadingPanel);
 

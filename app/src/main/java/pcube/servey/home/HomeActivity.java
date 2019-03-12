@@ -22,8 +22,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+
 import pcube.servey.NavgationDrawerUtils.FragmentDrawer;
 import pcube.servey.R;
+import pcube.servey.networkUtils.Constant;
+import pcube.servey.utils.StorePrefs;
 
 
 public class HomeActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -75,7 +80,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 dialog = new Dialog(getApplicationContext());
 
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+                String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+                Constant.token = refreshedToken;
+                Log.e("token",refreshedToken);
 //        SSLCertificateHandler.init();
 
 
@@ -95,6 +102,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
                 drawerFragment.setUp(R.id.fragment_navigation_drawer, drawer, mToolbar);
                 drawerFragment.setDrawerListener(this);
+                Log.e("usertype",StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,getApplicationContext()));
 
 //        fragment = new Fragment_Dashboard();
 //        // fragment = new Dashboard1();
@@ -142,20 +150,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                         drawer.closeDrawer(GravityCompat.START);
-                } else {
+                }
+                else {
 
                         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
 
                         if (backStackEntryCount > 0) {
                                 getFragmentManager().popBackStackImmediate();
 
-                                if (backStackEntryCount == 1) {
+                                if (backStackEntryCount == 1)
+                                {
                                         showUpButton(false);
                                         super.onBackPressed();
-                                } else
+                                }
+                                else
                                         super.onBackPressed();
 
-                        } else {
+                        }
+                        else {
                                 if (doubleBackToExitPressedOnce) {
                                         super.onBackPressed();
                                         return;

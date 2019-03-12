@@ -77,6 +77,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <android.support.design.widget.TextInputEditText
+                                    android:id="@+id/etEmail"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="8dp"
@@ -106,10 +107,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <android.support.design.widget.TextInputEditText
+                                    android:id="@+id/etPassword"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="8dp"
                                     android:singleLine="true"
+                                    android:inputType="textPassword"
                                     android:hint="Enter password"
                                     android:textSize="14sp"/>
                             </android.support.design.widget.TextInputLayout>
@@ -161,6 +164,20 @@
                             android:textSize="16sp"
                             android:textAllCaps="false"
                             android:text="@string/get_login"
+                            android:layout_height="40dp"
+                            android:background="@drawable/blue_button">
+                        </Button>
+
+                        <Button
+                            android:id="@+id/btnCreateaccount"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="200dp"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textAllCaps="false"
+                            android:text="@string/create_account"
                             android:layout_height="40dp"
                             android:background="@drawable/blue_button">
                         </Button>
