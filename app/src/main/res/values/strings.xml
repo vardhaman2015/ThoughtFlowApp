@@ -13,7 +13,7 @@
     <string name="nav_item_home">Home</string>
     <string name="navigation_drawer_close">close</string>
     <string name="navigation_drawer_open">open</string>
-    <string name="nav_openservylist">Open Survey List</string>
+    <string name="nav_openservylist">Open ThoughtFlow List</string>
     <string name="nav_postquestion">Post A Question</string>
     <string name="nav_notification">Notification</string>
     <string name="nav_response">Response</string>
@@ -41,4 +41,9 @@
     <string name="app_info">App Info</string>
     <string name="contact_suport">Contact Support</string>
     <string name="ok">ok</string>
+    <string name="nav_resetdata">Reset Data</string>
+    <string name="emailerror">Please enter email</string>
+    <string name="passworderror">Please enter password</string>
+    <string name="typeerror">Please enter type</string>
+    <string name="submit">Submit</string>
 </resources>

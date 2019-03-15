@@ -204,7 +204,7 @@ public class ServiceHandler {
             request = new Request.Builder()
                     .url(url)
                     .get()
-                   .addHeader("Authorization", header)
+                 //  .addHeader("Authorization", header)
                     .build();
         }
         catch (Exception e)

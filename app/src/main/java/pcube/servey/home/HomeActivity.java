@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                 Constant.token = refreshedToken;
-                Log.e("token",refreshedToken);
+                //Log.e("token",refreshedToken);
 //        SSLCertificateHandler.init();
 
 
@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
                 drawerFragment.setUp(R.id.fragment_navigation_drawer, drawer, mToolbar);
                 drawerFragment.setDrawerListener(this);
-                Log.e("usertype",StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,getApplicationContext()));
+//                Log.e("usertype",StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,getApplicationContext()));
 
 //        fragment = new Fragment_Dashboard();
 //        // fragment = new Dashboard1();

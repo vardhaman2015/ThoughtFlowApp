@@ -102,16 +102,31 @@
 
 
 
-                        <Button
-                            android:id="@+id/btn_post"
-                            android:layout_width="100dp"
-                            android:layout_height="35dp"
-                            android:layout_gravity="right"
-                            android:text="POST"
-                            android:textColor="@color/white"
-                            android:background="@drawable/blue_button"/>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <Button
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/btn_post"
+                                android:layout_width="100dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="right"
+                                android:text="POST"
+                                android:textColor="@color/white"
+                                android:background="@drawable/blue_button"/>
+
+                            <TextView
+                                android:id="@+id/tv_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Select time"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"/>
 
 
+                        </RelativeLayout>
 
 
 

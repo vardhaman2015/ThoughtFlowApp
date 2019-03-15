@@ -3,7 +3,6 @@ package pcube.servey.login;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +15,6 @@ import org.json.JSONObject;
 
 import pcube.servey.R;
 import pcube.servey.database.SqliteHelper;
-import pcube.servey.database.User;
 import pcube.servey.databinding.ActivityLoginBinding;
 import pcube.servey.forgot.ForgotPasswordActivity;
 import pcube.servey.home.HomeActivity;
@@ -145,7 +143,7 @@ public class LoginActivity extends AppCompatActivity implements ILognView {
         activityLoginBinding.tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ForgotPasswordActivity.class));
+                startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
             }
         });
 

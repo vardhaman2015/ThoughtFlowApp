@@ -68,6 +68,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
+                                android:visibility="invisible"
                                 android:src="@drawable/email"/>
 
                             <android.support.design.widget.TextInputLayout
@@ -76,12 +77,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <android.support.design.widget.TextInputEditText
-                                    android:id="@+id/etEmail"
+                                    android:id="@+id/etOtp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="8dp"
                                     android:singleLine="true"
-                                    android:hint="Enter email"
+                                    android:inputType="number"
+                                    android:hint="Enter otp"
                                     android:textSize="14sp"/>
                             </android.support.design.widget.TextInputLayout>
                         </RelativeLayout>
@@ -93,7 +95,7 @@
 
 
                         <Button
-                            android:id="@+id/btnLogin"
+                            android:id="@+id/btnSubmit"
                             android:layout_marginBottom="10dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="20dp"
@@ -101,7 +103,7 @@
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textAllCaps="false"
-                            android:text="@string/get_login"
+                            android:text="@string/submit"
                             android:layout_height="40dp"
                             android:background="@drawable/blue_button">
                         </Button>

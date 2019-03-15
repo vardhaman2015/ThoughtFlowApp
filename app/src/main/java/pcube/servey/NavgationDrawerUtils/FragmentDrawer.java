@@ -45,12 +45,11 @@ public class FragmentDrawer extends Fragment {
     private TextView tv_NavUsername, tvAppVersion;
     String App_Version = "";
 
-
     RelativeLayout loadingPanel;
 
     String imageUrl;
 
-    InputMethodManager inputMethodManager;
+    //InputMethodManager inputMethodManager;
 
 
     public FragmentDrawer() {
@@ -62,7 +61,8 @@ public class FragmentDrawer extends Fragment {
 
     }
 
-    public List<NavDrawerItem> getData() {
+    public List<NavDrawerItem> getData()
+    {
         List<NavDrawerItem> data = new ArrayList<>();
 
 
@@ -84,9 +84,11 @@ public class FragmentDrawer extends Fragment {
                 getActivity().getResources().getDrawable(R.drawable.reply),"setting"));
         data.add(new NavDrawerItem(getActivity().getResources().getString(R.string.nav_help),
                 getActivity().getResources().getDrawable(R.drawable.help),"help"));
+        data.add(new NavDrawerItem(getActivity().getResources().getString(R.string.nav_resetdata),
+                getActivity().getResources().getDrawable(R.drawable.reply),"reset"));
+
         data.add(new NavDrawerItem(getActivity().getResources().getString(R.string.nav_logout),
                 getActivity().getResources().getDrawable(R.drawable.reply),"logout"));
-
 
         return data;
     }
@@ -100,8 +102,8 @@ public class FragmentDrawer extends Fragment {
 
         List<String> list = new ArrayList<>(Arrays.asList(titles));*/
 
-        inputMethodManager = (InputMethodManager)
-                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputMethodManager = (InputMethodManager)
+//                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
        /* Gson gson = new Gson();
         String json = StorePrefs.getDefaults("customersPermission", getActivity());
@@ -253,7 +255,7 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                //inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
                 try{
                     //showDialogImage();

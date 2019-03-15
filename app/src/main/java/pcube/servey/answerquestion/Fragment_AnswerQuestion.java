@@ -22,6 +22,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +50,8 @@ public class Fragment_AnswerQuestion extends Fragment {
     String answer = "";
     AlertDialog alertDialog;
     String question_id = "", question_type = "";
+    boolean audio=true;
+    MediaPlayer mPlayer2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +60,11 @@ public class Fragment_AnswerQuestion extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getActivity().setTitle("Questions");
-        sqliteHelper = new SqliteHelper(getContext());
+        
+       // sqliteHelper = new SqliteHelper(getContext());
+
+        mPlayer2 = MediaPlayer.create(getActivity(), R.raw.audioquestion);
+
 //        postQuestionAdds=sqliteHelper.getAllBuffaloRateChartPtoPSnf();
         // Log.e("cvhkjhkjvhjkvh",""+postQuestionAdds.size());
         rv_question = view.findViewById(R.id.rv_question);
@@ -67,7 +75,8 @@ public class Fragment_AnswerQuestion extends Fragment {
         return view;
     }
 
-    private void getData() {
+    private void getData()
+    {
 
 
         new BackGroundTask.BackGroundTaskPOSTWithHeaderWithRawData(getActivity(), Constant.addedquestionlist, "", "",
@@ -85,14 +94,14 @@ public class Fragment_AnswerQuestion extends Fragment {
                                             jsonArray.getJSONObject(i).getString("question"), jsonArray.getJSONObject(i).getString("a"), jsonArray.getJSONObject(i).getString("b"), jsonArray.getJSONObject(i).getString("c"), jsonArray.getJSONObject(i).getString("d"), "", jsonArray.getJSONObject(i).getString("type"));
                                     postQuestionAdds.add(postQuestion);
                                 }
-                                layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                                layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                 rv_question.setLayoutManager(layoutManager);
                                 askMeAdapter = new AskMeAdapter(getActivity(), postQuestionAdds);
                                 rv_question.setAdapter(askMeAdapter);
                                 askMeAdapter.notifyDataSetChanged();
 
                             } else {
-                                Utils.displayToastMessage(getContext(), "error");
+                                Utils.displayToastMessage(getActivity(), "error");
                             }
 
 
@@ -124,7 +133,8 @@ public class Fragment_AnswerQuestion extends Fragment {
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.row_question_response, parent, false);
 
@@ -133,7 +143,8 @@ public class Fragment_AnswerQuestion extends Fragment {
 
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, final int position) {
+        public void onBindViewHolder(final ViewHolder holder, final int position)
+        {
 
 
 //        private void deleteFile(final int position) {
@@ -144,8 +155,8 @@ public class Fragment_AnswerQuestion extends Fragment {
 //            notifyDataSetChanged();
 //            getCreatorProfile();
 //        }
-            Log.e("type",""+postQuestionArrayList.get(position).getType()+StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE, getContext()));
-            if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE, getContext()).equals("5"))
+            Log.e("type",""+postQuestionArrayList.get(position).getType()+StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE, getActivity()));
+            if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE, getActivity()).equals("5"))
             {
 
                 if (postQuestionArrayList.get(position).getType().equals("video"))
@@ -155,7 +166,7 @@ public class Fragment_AnswerQuestion extends Fragment {
                 }
                 else
                     {
-                    holder.ll_main.setVisibility(View.VISIBLE);
+                        holder.ll_main.setVisibility(View.VISIBLE);
                         holder.tv_question.setText(postQuestionArrayList.get(position).getQuestion() + "   Question type " + postQuestionArrayList.get(position).getType());
                 }
             }
@@ -200,7 +211,8 @@ public class Fragment_AnswerQuestion extends Fragment {
 
                 }
 
-                private void getDialog() {
+                private void getDialog()
+                {
                     final AlertDialog.Builder dialogBuilder;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         dialogBuilder = new AlertDialog.Builder(getActivity(), R.style.DialogStyle);
@@ -233,7 +245,7 @@ public class Fragment_AnswerQuestion extends Fragment {
                     rb2.setText(postQuestionArrayList.get(position).getOptionb());
                     rb3.setText(postQuestionArrayList.get(position).getOptionc());
                     rb4.setText(postQuestionArrayList.get(position).getOptiond());
-                    if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE, getContext()).equals("5"))
+                    if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE, getActivity()).equals("5"))
                     {
                         ll_playvideo.setVisibility(View.GONE);
                         ll_playaudio.setVisibility(View.GONE);
@@ -262,10 +274,33 @@ public class Fragment_AnswerQuestion extends Fragment {
 
                     ll_playaudio.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
-                            MediaPlayer mPlayer2;
-                            mPlayer2 = MediaPlayer.create(getActivity(), R.raw.audioquestion);
-                            mPlayer2.start();
+                        public void onClick(View v)
+                        {
+
+
+                            if(audio==true)
+                            {
+
+
+
+                                 mPlayer2.start();
+
+                                Log.e("boolean","1"+audio);
+                                audio=false;
+                            }
+                            else
+                            {
+                                Log.e("boolean","2"+audio);
+//                                if(mPlayer2.isPlaying())
+//                                {
+//                                    mPlayer2.pause();
+//                                }
+                                 mPlayer2.pause();
+//
+                                audio=true;
+
+                            }
+
                         }
                     });
 

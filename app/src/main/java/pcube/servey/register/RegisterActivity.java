@@ -1,73 +1,55 @@
 package pcube.servey.register;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pcube.servey.R;
 import pcube.servey.database.SqliteHelper;
 import pcube.servey.database.User;
 import pcube.servey.databinding.ActivityRegisterBinding;
+import pcube.servey.networkUtils.Constant;
+import pcube.servey.utils.Utils;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements IRegisterView {
 
     ActivityRegisterBinding activityRegisterBinding;
-    SqliteHelper sqliteHelper;
+    RegisterPresenter registerPresenter;
+  //  List<UserTypeModel> userlist=new ArrayList<UserTypeModel>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityRegisterBinding=DataBindingUtil.setContentView(this,R.layout.activity_register);
-        sqliteHelper = new SqliteHelper(this);
+        registerPresenter=new RegisterPresenter(this,getApplicationContext());
+        //registerPresenter.getUserType();
+
+        Log.e("userlist",""+Constant.userTypeModelList.size());
+
         activityRegisterBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-
-                String email = activityRegisterBinding.etEmail.getText().toString();
-                String type = activityRegisterBinding.etType.getText().toString();
-                String Password = activityRegisterBinding.etConfirmPassword.getText().toString();
-
-                //Check in the database is there any user associated with  this email
-//                if (sqliteHelper.isEmailExists(email))
-//                {
-//                    Snackbar.make( activityRegisterBinding.btnLogin, "User already exists with same email ", Snackbar.LENGTH_LONG).show();
-//
-//                    //Email does not exist now add new user to database
-//
-//                }
-//                else {
-
-                    //Email exists with email input provided so show error user already exist
-
-
-                if (!sqliteHelper.isEmailExists(email)) {
-
-                    //Email does not exist now add new user to database
-                    sqliteHelper.addUser(new User(null, type, email, Password));
-                    Snackbar.make(activityRegisterBinding.btnLogin, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run()
-                        {
-                            finish();
-                        }
-                    }, Snackbar.LENGTH_LONG);
-                }else {
-
-                    //Email exists with email input provided so show error user already exist
-                    Snackbar.make(activityRegisterBinding.btnLogin, "User already exists with same email ", Snackbar.LENGTH_LONG).show();
-                }
-
+            public void onClick(View v) {
+                String email=activityRegisterBinding.etEmail.getText().toString();
+                String password=activityRegisterBinding.etPassword.getText().toString();
+                registerPresenter.doRegister(email,password,"3");
             }
-
-//            }
         });
 
 
 
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        Utils.displayToastMessage(getApplicationContext(),msg);
     }
 }

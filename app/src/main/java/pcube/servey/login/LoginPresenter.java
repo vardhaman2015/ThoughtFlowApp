@@ -19,7 +19,7 @@ public class LoginPresenter implements ILoginPresenter {
             lognView.showMessage("Pleas fill this");
         }
         else
-        {
+            {
             lognView.showMessage("Success");
         }
 

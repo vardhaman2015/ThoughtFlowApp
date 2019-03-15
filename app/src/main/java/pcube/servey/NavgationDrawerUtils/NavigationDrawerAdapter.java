@@ -127,7 +127,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     {
                         fragment = new Fragment_AnswerQuestion();
                     }
-                    else {
+                    else
+                        {
                         Toast.makeText(context,"Can't view ",Toast.LENGTH_SHORT).show();
                     }
 
@@ -154,7 +155,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     {
                         fragment = new Fragment_Response();
                     }
-                    else {
+                    else
+                        {
                         Toast.makeText(context,"Can't view ",Toast.LENGTH_SHORT).show();
                     }
 
@@ -250,6 +252,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
 
                 });
+
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -259,6 +262,51 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 AlertDialog dialog = builder.create();
                 dialog.show();
                     //logout();
+                    break;
+
+                case "reset":
+
+                    if (StorePrefs.getDefaults(StorePrefs.PREFS_USER_TYPE,context).equalsIgnoreCase("3"))
+                    {
+                        new BackGroundTask.BackGroundTaskGETWithHeader(context, Constant.resetdata,  "",
+                                new OnTaskCompleted() {
+                                    @Override
+                                    public void onTaskCompleted(String response)
+                                    {
+                                        Log.e("responsetesttscheck", response);
+
+                                        try {
+                                            JSONObject jsonObject1 = new JSONObject(response);
+                                            if (jsonObject1.getInt("status") == 1)
+                                            {
+                                                Utils.displayToastMessage(context, jsonObject1.getString("message"));
+
+                                                StorePrefs.clearAllDefaults(context);
+                                                Intent intent = new Intent(context, SplashActivity.class);
+                                                context.startActivity(intent);
+                                            }
+                                            else {
+                                                Utils.displayToastMessage(context, "error");
+                                            }
+
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(String error) {
+
+                                    }
+                                }).execute();
+
+                    }
+                    else {
+                        Toast.makeText(context,"Can't reset ",Toast.LENGTH_SHORT).show();
+                    }
+
+
                     break;
                 default:
                     break;

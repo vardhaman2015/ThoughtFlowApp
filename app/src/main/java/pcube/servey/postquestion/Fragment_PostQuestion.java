@@ -1,5 +1,6 @@
 package pcube.servey.postquestion;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -53,6 +55,10 @@ public class Fragment_PostQuestion extends Fragment {
     RecyclerView rv_question;
     SqliteHelper sqliteHelper;
     String question_id="",question_type="";
+    MediaPlayer mPlayer2;
+    boolean audio=true;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -60,7 +66,8 @@ public class Fragment_PostQuestion extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getActivity().setTitle("Post Question");
-        sqliteHelper = new SqliteHelper(getContext());
+        mPlayer2 = MediaPlayer.create(getActivity(), R.raw.audioquestion);
+      //  sqliteHelper = new SqliteHelper(getContext());
 //        PostQuestion postQuestion=new PostQuestion("1","Which area is your primary focus area for the next year on your personal front","Health","Money","Security","Social Management","Health","text");
 //        postQuestionArrayList.add(postQuestion);
 //        PostQuestion postQuestion2=new PostQuestion("2","If you make profits, where will you invest your money in the coming quarters","Stocks","Real Estate","Govt Bonds","Social Management","Bank","video");
@@ -195,7 +202,25 @@ public class Fragment_PostQuestion extends Fragment {
                 holder.llvideo.setVisibility(View.GONE);
             }
 
-
+holder.tv_time.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //eReminderTime.setText( selectedHour + ":" + selectedMinute);
+                Utils.displayToastMessage(getContext(),""+selectedHour + ":" + selectedMinute);
+                holder.tv_time.setText(""+selectedHour + ":" + selectedMinute);
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+    }
+});
 
        holder.btn_post.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -203,12 +228,15 @@ public class Fragment_PostQuestion extends Fragment {
            {
                question_id=postQuestionArrayList.get(position).getId();
                question_type=postQuestionArrayList.get(position).getType();
+
+             addQuestion();
+
 //               int i=1;
 //               sqliteHelper.addQuestion(new PostQuestionPost(String.valueOf(i), postQuestionArrayList.get(position).getQuestion(), postQuestionArrayList.get(position).getOptiona(), postQuestionArrayList.get(position).getOptionb(),postQuestionArrayList.get(position).getOptionc(),postQuestionArrayList.get(position).getOptiond(),postQuestionArrayList.get(position).getAnswer(),postQuestionArrayList.get(position).getType()));
 //                i++;
 //               Toast.makeText(getActivity(),"Question added",Toast.LENGTH_LONG).show();
 
-               addQuestion();
+
            }
 
            private void addQuestion() {
@@ -276,9 +304,29 @@ public class Fragment_PostQuestion extends Fragment {
                 holder.llaudio.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MediaPlayer mPlayer2;
-                        mPlayer2 = MediaPlayer.create(getActivity(), R.raw.audioquestion);
-                        mPlayer2.start();
+                        if(audio==true)
+                        {
+
+
+
+                            mPlayer2.start();
+
+                            Log.e("boolean","1"+audio);
+                            audio=false;
+                        }
+                        else
+                        {
+                            Log.e("boolean","2"+audio);
+//                                if(mPlayer2.isPlaying())
+//                                {
+//                                    mPlayer2.pause();
+//                                }
+                            mPlayer2.pause();
+//
+                            audio=true;
+
+                        }
+
                     }
                 });
             }
@@ -296,7 +344,7 @@ public class Fragment_PostQuestion extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tv_question;
+            TextView tv_question,tv_time;
             Button btn_post;
             LinearLayout llvideo,llaudio;
 
@@ -308,6 +356,7 @@ public class Fragment_PostQuestion extends Fragment {
                 btn_post = itemView.findViewById(R.id.btn_post);
                 llvideo = itemView.findViewById(R.id.llvideo);
                 llaudio = itemView.findViewById(R.id.llaudio);
+                tv_time = itemView.findViewById(R.id.tv_time);
 //                iv_user = itemView.findViewById(R.id.iv_user);
 //                tv_message = itemView.findViewById(R.id.tv_message);
 //                tv_like1 = itemView.findViewById(R.id.tv_like1);
